@@ -11,8 +11,8 @@ CORES_DIR := cores
 INC_DIR   := include
 
 TMP_DIR  := tmp
-OUT_DIR  := bin
-DIST_DIR := dist
+OUT_DIR  := ../bin
+DIST_DIR := ../dist
 
 SYSTEM_DIR := system
 ASSETS_DIR := assets
