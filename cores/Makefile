@@ -3,7 +3,7 @@ CC       := $(WASI_SDK)/bin/clang   --sysroot=$(WASI_SDK)/share/wasi-sysroot
 CXX      := $(WASI_SDK)/bin/clang++ --sysroot=$(WASI_SDK)/share/wasi-sysroot
 AR       := $(WASI_SDK)/bin/ar
 
-TARGET       := quicknes mgba snes9x genesis melonds
+TARGET       := desmume
 TARGET_LIB   := $(addprefix lib, $(addsuffix .a, $(TARGET)))
 TARGET_CLEAN := $(TARGET_LIB:%=%-clean)
 

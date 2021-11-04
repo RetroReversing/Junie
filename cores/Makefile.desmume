@@ -1,0 +1,8 @@
+TARGET      := libdesmume.a
+
+BUILD_DIR   := $(TARGET:lib%.a=%)/desmume/src/frontend/libretro
+BUILD_FLAGS := TARGET=../../../../../$(TARGET)
+CFLAGS      := -I../../../../../override
+CXXFLAGS    := -I../../../../../override
+
+include Makefile.common

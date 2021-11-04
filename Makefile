@@ -46,7 +46,7 @@ LDFLAGS := \
 
 MAKEFLAGS += --no-print-directory
 
-CORES := quicknes mgba snes9x genesis melonds
+CORES := desmume
 
 all: clean $(TARGET)
 
