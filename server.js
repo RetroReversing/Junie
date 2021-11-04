@@ -8,11 +8,17 @@ const directory   = require('serve-index');
 const app = express();
 
 app.use(cors());
+app.use(express.text());
 app.use(compression({ filter: () => true }));
 
 app.use('/assets', static('./assets'))
 app.use('/system', static('./system'))
 app.use('/games', static('./games'))
+
+app.post('/log', (req, res) => {
+    console.log(req.body.replace('\n', ''));
+    return res.end();
+});
 
 app.use('/', directory('./games'), (req, res) => {
     const file = fs.existsSync(`./bin${req.path}`)

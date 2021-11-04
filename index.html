@@ -70,8 +70,22 @@
         const log   = console.log;
         const error = console.error;
 
-        console.log   = (data) => data && data != '\n' && log(data);
-        console.error = (data) => data && data != '\n' && error(data);
+        console.log   = (data) => {
+            if (!data || data == '\n')
+                return
+            
+            log(data);
+
+            fetch('/log', { method: 'POST', body: data });
+        }
+        console.error = (data) => {
+            if (!data || data == '\n')
+                return
+
+            error(data);
+
+            fetch('/log', { method: 'POST', body: data });
+        }
 
         //Unlock audio context
         const unlock = () => {
