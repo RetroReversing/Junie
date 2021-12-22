@@ -32,10 +32,10 @@ jobs:
         - run: cd libRetroReversing/websrc/ && yarn install && yarn production
           env:
             REACT_APP_GIT_SHA: ${{ github.SHA }}
-        - run: make
+#         - run: make
 
         - name: Deploy
           uses: peaceiris/actions-gh-pages@v3
           with:
             github_token: ${{ secrets.GITHUB_TOKEN }}
-            publish_dir: ./build
+            publish_dir: libRetroReversing/websrc/dist
