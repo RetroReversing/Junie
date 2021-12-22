@@ -242,6 +242,11 @@ bool JUN_AppEnvironment(JUN_App *public, unsigned cmd, void *data)
 
             return true;
         }
+        case RETRO_ENVIRONMENT_SET_FRAME_TIME_CALLBACK:
+        {    
+            // TODO: implement properly
+            return true; 
+        }
         default:
         {
             const char *name = JUN_EnumsGetString(JUN_ENUM_ENVIRONMENT, cmd);

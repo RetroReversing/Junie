@@ -1,0 +1,8 @@
+TARGET      := libgenesisRR.a
+
+BUILD_DIR   := $(TARGET:lib%.a=%)
+BUILD_FLAGS := TARGET=../$(TARGET) platform=emscripten -f Makefile.libretro
+CFLAGS      := -I../override -DEMSCRIPTEN
+CPPFLAGS    := -I../override -DEMSCRIPTEN
+
+include Makefile.common

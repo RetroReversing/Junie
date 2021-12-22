@@ -41,12 +41,12 @@ CFLAGS  := \
 LDFLAGS := \
 	-L$(LIB_DIR) -L$(CORES_DIR) \
 	-lretro -lmatoya -lz \
-	-Wl,--allow-undefined -Wl,--export-table \
+	-Wl,--allow-undefined -Wl,--export-dynamic -Wl,--export-table \
 	-O3
 
 MAKEFLAGS += --no-print-directory
 
-CORES := quicknes mgba snes9x genesis melonds
+CORES := quicknes mgba snes9x genesis melonds genesisrr
 
 all: clean $(TARGET)
 
