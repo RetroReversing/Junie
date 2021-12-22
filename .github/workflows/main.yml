@@ -1,9 +1,9 @@
-name: github pages
+name: Github pages JunieRR
 
 on:
     push:
         branches:
-        - master
+        - main
 
 jobs:
     deploy:
