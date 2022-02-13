@@ -40,10 +40,9 @@ CFLAGS  := \
 	-I$(SRC_DIR) -I$(INC_DIR) -Wall -O3
 LDFLAGS := \
 	-L$(LIB_DIR) -L$(CORES_DIR) \
-	-lretro -lmatoya \
+	-lretro -lmatoya -lz \
 	-Wl,--allow-undefined -Wl,--export-dynamic -Wl,--export-table \
 	-O3
-# libRR -lz
 MAKEFLAGS += --no-print-directory
 
 CORES := quicknes mgba snes9x genesis melonds genesisrr
