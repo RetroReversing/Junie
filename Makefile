@@ -40,10 +40,10 @@ CFLAGS  := \
 	-I$(SRC_DIR) -I$(INC_DIR) -Wall -O3
 LDFLAGS := \
 	-L$(LIB_DIR) -L$(CORES_DIR) \
-	-lretro -lmatoya -lz \
+	-lretro -lmatoya \
 	-Wl,--allow-undefined -Wl,--export-dynamic -Wl,--export-table \
 	-O3
-
+# libRR -lz
 MAKEFLAGS += --no-print-directory
 
 CORES := quicknes mgba snes9x genesis melonds genesisrr
@@ -53,6 +53,7 @@ all: clean $(TARGET)
 $(TARGET): $(CORES)
 	@cp index.html settings.json web/* $(OUT_DIR)
 	@cp $(LIB_DIR)/matoya/src/unix/web/matoya.js $(OUT_DIR)
+	cp $(OUT_DIR)/*.wasm ./libRetroReversing/websrc/dist
 
 $(CORES): deps $(OBJ)
 	$(CXX) $(LDFLAGS) -l$@ $(OBJ) -o $(OUT_DIR)/$@.wasm
