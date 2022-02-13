@@ -124,7 +124,7 @@ To initialize the submodules if you haven't already:
 
 ```bash
 git submodule sync
-git submodule update --init
+git submodule update --init --recursive
 ```
 
 To build a local version of Junie:

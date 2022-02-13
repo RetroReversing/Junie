@@ -1,37 +1,37 @@
 let frontend_status = { paused: false, startAt: 0 };
         
 
-        function run(system, core, game) {
-            //Start core execution
-            MTY_Start(`/${core.library}.wasm`, {
-                js_get_host:  (value, length) => MTY_StrToC(window.location.hostname, value, length),
-                js_get_port:  ()              => window.location.port ?? 0,
-                js_is_secure: ()              => location.protocol.indexOf('https') != -1,
+function run(system, core, game) {
+    //Start core execution
+    MTY_Start(`/${core.library}.wasm`, {
+        js_get_host:  (value, length) => MTY_StrToC(window.location.hostname, value, length),
+        js_get_port:  ()              => window.location.port ?? 0,
+        js_is_secure: ()              => location.protocol.indexOf('https') != -1,
 
-                js_get_system: (value, length) => MTY_StrToC(system,    value, length),
-                js_get_core:   (value, length) => MTY_StrToC(core.name, value, length),
-                js_get_game:   (value, length) => MTY_StrToC(game,      value, length),
+        js_get_system: (value, length) => MTY_StrToC(system,    value, length),
+        js_get_core:   (value, length) => MTY_StrToC(core.name, value, length),
+        js_get_game:   (value, length) => MTY_StrToC(game,      value, length),
 
-                js_read_file:  JUN_ReadFile,
-                js_write_file: JUN_WriteFile,
-                retro_deinit: ()=> console.log("retro_deinit"),
-                get_frontend_status: ()=> {
-                    const json_string = JSON.stringify(frontend_status)+"\0";
-                    const MAX_COMMAND_LENGTH = 1024;
-                    MTY.libRRcommand = MTY_Alloc(MAX_COMMAND_LENGTH);
-                    if (json_string.length >MAX_COMMAND_LENGTH ) {
-                        console.error("Warning: please increase MAX_COMMAND_LENGTH to at least:", json_string.length);
-                    }
-                    const c_str = MTY_StrToC(json_string,MTY.libRRcommand, json_string.length);
-                    console.log("get_frontend_status", json_string, c_str);
-                    return c_str;
-                }
-            });
-            
-
-            //Prevent mobile keyboard
-            MTY.clip.readOnly = true;
+        js_read_file:  JUN_ReadFile,
+        js_write_file: JUN_WriteFile,
+        retro_deinit: ()=> console.log("retro_deinit"),
+        get_frontend_status: ()=> {
+            const json_string = JSON.stringify(frontend_status)+"\0";
+            const MAX_COMMAND_LENGTH = 1024;
+            MTY.libRRcommand = MTY_Alloc(MAX_COMMAND_LENGTH);
+            if (json_string.length >MAX_COMMAND_LENGTH ) {
+                console.error("Warning: please increase MAX_COMMAND_LENGTH to at least:", json_string.length);
+            }
+            const c_str = MTY_StrToC(json_string,MTY.libRRcommand, json_string.length);
+            console.log("get_frontend_status", json_string, c_str);
+            return c_str;
         }
+    });
+    
+
+    //Prevent mobile keyboard
+    MTY.clip.readOnly = true;
+}
 
         //Retrieve context parameters
         const params = decodeURI(window.location.pathname).split('/');

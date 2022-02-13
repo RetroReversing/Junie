@@ -1,9 +1,10 @@
 WASI_SDK := $(HOME)/wasi-sdk-12.0
-CC       := $(WASI_SDK)/bin/clang   --sysroot=$(WASI_SDK)/share/wasi-sysroot
-CXX      := $(WASI_SDK)/bin/clang++ --sysroot=$(WASI_SDK)/share/wasi-sysroot
+CC       := $(WASI_SDK)/bin/clang   --sysroot=$(WASI_SDK)/share/wasi-sysroot -DEMSCRIPTEN
+CXX      := $(WASI_SDK)/bin/clang++ --sysroot=$(WASI_SDK)/share/wasi-sysroot -DEMSCRIPTEN
 AR       := $(WASI_SDK)/bin/ar
 
-TARGET       := quicknes mgba snes9x genesis melonds
+TARGET       := genesisRR 
+# quicknes mgba snes9x genesis melonds
 TARGET_LIB   := $(addprefix lib, $(addsuffix .a, $(TARGET)))
 TARGET_CLEAN := $(TARGET_LIB:%=%-clean)
 

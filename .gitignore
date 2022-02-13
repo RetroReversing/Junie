@@ -13,3 +13,4 @@ dist
 # Core files
 system
 games
+.DS_Store

@@ -14,10 +14,14 @@ app.use('/assets', static('./assets'))
 app.use('/system', static('./system'))
 app.use('/games', static('./games'))
 
+const web_src_path = "./libRetroReversing/websrc/dist/" || "./bin";
+const index_html_path = "./libRetroReversing/websrc/dist/index.html" || './bin/index.html';
+
 app.use('/', directory('./games'), (req, res) => {
-    const file = fs.existsSync(`./bin${req.path}`)
-        ? `./bin${req.path}`
-        : './bin/index.html';
+    const full_path = web_src_path + req.path;
+    const file = fs.existsSync(full_path)
+        ? full_path
+        : index_html_path;
 
     res.sendFile(file, { root: __dirname });
 });
