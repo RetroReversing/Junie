@@ -45,7 +45,8 @@ LDFLAGS := \
 	-O3
 MAKEFLAGS += --no-print-directory
 
-CORES := quicknes mgba snes9x genesis melonds genesisrr
+# CORES := quicknes mgba snes9x genesis melonds genesisrr
+CORES := genesisrr
 
 all: clean $(TARGET)
 

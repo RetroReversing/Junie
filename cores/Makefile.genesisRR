@@ -1,4 +1,4 @@
-TARGET      := libgenesisRR.a
+TARGET      := libgenesisrr.a
 
 BUILD_DIR   := $(TARGET:lib%.a=%)
 BUILD_FLAGS := TARGET=../$(TARGET) platform=emscripten -f Makefile.libretro

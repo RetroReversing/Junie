@@ -1,28 +1,32 @@
-# Junie
+# ReversingEmulator.com (Fork of Junie)
 
-Junie is a [Libretro](https://www.libretro.com/index.php/home-2/) frontend that aims to run entirely in your browser, desktop or mobile! 
+ReversingEmulator.com is a web-based [LibRetroReversing](https://github.com/RetroReversing/libRetroReversing) frontend that aims to run entirely in your browser, desktop or mobile! 
 * No installation on the end-devices.
 * Near-native performances thanks to WebAssembly.
 * Wide range of supported/compatible cores (... soon).
 
 Junie currently runs on most recent browsers, though your experience will probably be the best on Chrome and Safari (I have issues on Firefox on my side, not sure if it's isolated to my computer).
 
-[Demo](https://junie.herokuapp.com/): here you can play 
-[Indivisible](https://kasumi.itch.io/indivisible), 
-[Celeste Classic](https://github.com/JeffRuLz/Celeste-Classic-GBA),
-[Daedeus](https://izma.itch.io/deadeus) and 
-[GraviBots](https://retrosouls.itch.io/gravibots16bit). 
-I haven't played those games yet but will do for sure!
+# Supported Consoles
+The following consoles are fully supported:
+* Game Gear
+* Sega Master System
 
-If you prefer to play your own games, head to [this page](https://junie.herokuapp.com/play) and select a game with one of the following extensions: `nes`, `smc`, `sms`, `bin`, `gb`, `gbc`, `gba`, `nds`.
+The following consoles are in a semi-working state:
+* NES
+* SNES
+* GB/GBC
+* GBA - No reversing features yet
+* NDS - No reversing features yet
 
-![](assets/showcase.png)
+# Games
+No games are hosted on the site itself so you need to provide your own ROMS, these will be stored in your browser's local storage so reloading the page will continue where you left of. 
 
-*Disclaimer: development is still in progress. I'll try my best not to break anything between releases (especially regarding local save files), but it's probably a good idea for you to test releases before updating.*
+However if you clear your browser cache all your ROMS and reversing data will be removed.
 
 # Supported features
 
-- [x] All the systems described in the [Folder structure](#folder-structure).
+- [x] All the systems described in the [Supported Consoles](#Supported-Consoles) section.
 - [x] Save files (stored inside your browser's storage).
 - [x] Additional core-specific system files.
 - [x] Core-specific configurations override.
@@ -31,33 +35,6 @@ If you prefer to play your own games, head to [this page](https://junie.herokuap
 - [x] Touch inputs, enabled by pressing the top button.
 - [x] Savestate creation and restore.
 - [x] Fast-forward up to 4 times the original speed.
-
-# Folder structure
-
-Games must be organized as follows, inside the application folder:
-
-```
-games
-├── Game Boy
-├── Game Boy Advance
-├── Game Boy Color
-├── Master System
-├── Mega Drive
-├── NES
-├── Nintendo DS
-└── SNES
-```
-
-System files must be organized as follows, inside the application folder:
-
-```
-system
-├── Genesis Plus GX
-├── melonDS
-├── mGBA
-├── QuickNES
-└── Snes9x
-```
 
 # Configuration
 
@@ -133,13 +110,21 @@ To build a local version of Junie:
 make
 ```
 
-To run the local version:
+## Running the dev server
+In order to get the latest changes and do development on the platfom, you can run the dev server.
+```
+cd libRetroReversing/websrc
+yarn dev 
+```
+Then go to http://localhost:8081 
 
+## Compiling the WASM cores
 ```bash
-node server.js 
+cd cores && rm -rf *.a && make all
 ```
 
-To package Junie for all the available platforms:
+## Packaging as an executable
+To package for all the available platforms:
 
 ```bash
 make dist
@@ -152,6 +137,7 @@ To run the packaged version, go to `dist/<platform>` and run:
 server.exe # Windows platform
 ```
 
+## Building with Docker
 If you prefer to use Docker, here you go:
 
 ```bash
@@ -180,25 +166,11 @@ Right now, the most problematic ones are threading and JIT backend. Also, no Ope
 
 That said, even after disabling all the above features when building the cores, performance is still far beyond acceptable for most cores. You will however have some trouble with 3D games on Nintendo DS (2D games run quite fine on recent hardware, as far as I've tested). Low-end mobile phones might also have struggle with the SNES.
 
-## Game sizes
-
-Just a note to warn you about game sizes. There is currently no managed cache mechanism to keep game files data between reloads. For instance, depending on how you browser handles them, you might download 20 to 200MB files each time you start a game.
-
-For those who have a low data plan on their mobile phones: be careful, your browser might still cache them, but might not! Improving this will probably be one of my top priorities.
-
-# Next steps
-
-- [ ] Add a cache mechanism to keep games locally between reloads.
-- [ ] Synchronize save files for cross-browser play.
-- [ ] Develop a better UI (both directory listing and in-game).
-- [ ] Build Junie for `libmatoya`'s supported platforms as well.
-- [ ] Multiplayer support, both locally and through WebRTC.
-
 # Credits
 
 ## Libraries
-
-- All of this could only be possible thanks to [libmatoya](https://github.com/matoya/libmatoya).
+- All of this is only possible thanks to the [Junie](https://github.com/Namaneo/Junie) libRetro Frontend
+- Also thanks to [libmatoya](https://github.com/matoya/libmatoya).
 - The [zlib](https://github.com/madler/zlib) library is required for some cores.
 - And of course, modules and headers from [libretro-common](https://github.com/libretro/libretro-common).
 
@@ -223,4 +195,4 @@ For those who have a low data plan on their mobile phones: be careful, your brow
 
 # License
 
-Junie is licensed under the [GNU General Public License v3.0](https://github.com/Namaneo/Junie/blob/main/LICENSE.md). When applicable, dependencies listed in the [Credits](#credits) section retain their original licenses.
+ReversingEmulator.com is licensed under the [GNU General Public License v3.0](https://github.com/Namaneo/Junie/blob/main/LICENSE.md). When applicable, dependencies listed in the [Credits](#credits) section retain their original licenses.
