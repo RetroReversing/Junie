@@ -119,8 +119,14 @@ yarn dev
 Then go to http://localhost:8081 
 
 ## Compiling the WASM cores
+From the root directory of this checkout run:
 ```bash
-cd cores && rm -rf *.a && make all
+cd cores && rm -rf *.a && make all && cd .. && make
+```
+
+Note that if you use the *zsh* shell and you don't already have the libraries built you can run this to fix the no matches found error:
+```bash
+setopt +o nomatch
 ```
 
 ## Packaging as an executable
