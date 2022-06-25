@@ -133,7 +133,7 @@ static void configure(JUN_File *file, void *opaque)
     JUN_AppConfigure((JUN_App *)opaque, (char *)file->buffer);
 }
 
-int main(int argc, char *argv[])
+__attribute__((export_name("_main"))) int main(int argc, char *argv[])
 {
     MTY_SetLogFunc(log_func, NULL);
 
