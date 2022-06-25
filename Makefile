@@ -1,8 +1,8 @@
 TARGET := junie
 
-WASI_SDK := $(HOME)/wasi-sdk-13.0
+WASI_SDK := $(HOME)/wasi-sdk-16.0
 CC 	     := $(WASI_SDK)/bin/clang   --sysroot=$(WASI_SDK)/share/wasi-sysroot
-CXX	     := $(WASI_SDK)/bin/clang++ --sysroot=$(WASI_SDK)/share/wasi-sysroot
+CXX	     := $(WASI_SDK)/bin/clang++ -mexec-model=reactor --sysroot=$(WASI_SDK)/share/wasi-sysroot
 AR       := $(WASI_SDK)/bin/ar r
 
 SRC_DIR   := src
